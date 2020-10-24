@@ -42,3 +42,7 @@ lint:
 	poetry run black --check ${PACKAGE_NAME}
 	poetry run flake8 ${PACKAGE_NAME}
 	poetry run pylint *.py
+
+.PHONY: justclimb
+justclimb:
+	poetry run scrapy runspider justclimb_price_crawler.py
