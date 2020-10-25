@@ -9,6 +9,8 @@ from typing import Dict, Optional, Sequence, Union
 
 from scrapy import Selector, Spider
 
+from helpers import breakdown_price_tag
+
 logging.basicConfig(level=logging.INFO)
 
 LOGGER = logging.getLogger(__name__)
@@ -38,18 +40,6 @@ class ClimbPassModel:
 
     def __str__(self) -> str:
         return pformat(asdict(self))
-
-
-def breakdown_price_tag(price_tag: str) -> Dict[str, Union[str, int]]:
-    """
-    Breakdown a string price tag into currency & price amount
-    """
-    if not price_tag:
-        return {}
-    return {
-        "currency_symbol": price_tag[0],
-        "price": int(price_tag[1:].replace(",", "")),
-    }
 
 
 class BasePassCrawler(ABC):
@@ -351,7 +341,7 @@ class JustclimbPriceSpider(Spider):
         parser = JustclimbMonthPassCrawler(selector=response)
         return parser.parse()
 
-    def _select_jcer_price(self, response):
+    def _select_membership_price(self, response):
         parser = JustclimbJcerCrawler(selector=response)
         return parser.parse()
 
@@ -365,5 +355,12 @@ class JustclimbPriceSpider(Spider):
         month_pass_price = self._select_month_pass_price(response)
         LOGGER.info(f"MONTHPASS PRICE \n{month_pass_price}")
 
-        jcer_price = self._select_jcer_price(response)
-        LOGGER.info(f"JCER PRICE \n{jcer_price}")
+        membership_price = self._select_membership_price(response)
+        LOGGER.info(f"JCER PRICE \n{membership_price}")
+
+        yield {
+            "day_pass": day_pass_price,
+            "share_pass_price": share_pass_price,
+            "month_pass_price": month_pass_price,
+            "membership_price": membership_price,
+        }
