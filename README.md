@@ -8,6 +8,7 @@ This project aims to make use of web crawlers to make climb lover life easier on
 ```
 poetry install
 make justclimb
+make vermcity
 ```
 
 ## Plan
@@ -15,7 +16,7 @@ make justclimb
 Not in ordering.
 
 -   [x] [Just Climb](https://justclimb.hk/price/)
--   [ ] Verm City
+-   [x] [Verm City](https://www.vermcity.com/pricing-chi)
 -   [ ] Project Undescore
 -   [ ] Campus
 -   [ ] Attic V

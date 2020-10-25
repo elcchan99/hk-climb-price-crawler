@@ -46,3 +46,7 @@ lint:
 .PHONY: justclimb
 justclimb:
 	poetry run scrapy runspider justclimb_price_crawler.py
+
+.PHONY: vermcity
+vermcity:
+	poetry run scrapy runspider vermcity_price_crawler.py --loglevel=WARNING
