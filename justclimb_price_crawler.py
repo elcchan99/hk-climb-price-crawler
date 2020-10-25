@@ -5,7 +5,7 @@ import logging
 from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass, field
 from pprint import pformat
-from typing import Dict, Optional, Sequence, Union
+from typing import Optional, Sequence
 
 from scrapy import Selector, Spider
 
