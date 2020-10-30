@@ -50,3 +50,7 @@ justclimb:
 .PHONY: vermcity
 vermcity:
 	poetry run scrapy runspider vermcity_price_crawler.py --loglevel=WARNING
+
+.PHONY: atticv
+atticv:
+	poetry run scrapy runspider atticv_price_crawler.py --loglevel=WARNING
