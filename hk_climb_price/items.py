@@ -18,7 +18,7 @@ class PackageItem:
 
     title: str
     category: str
-    tags: Sequence[str] = field(default_factory=set)
+    tags: Sequence[str] = field(default_factory=list)
     currency_symbol: str = field(default="$")
     price: int = field(default_factory=int)
     validity: Optional[str] = field(default=None)

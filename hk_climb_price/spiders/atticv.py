@@ -29,7 +29,7 @@ class MultiplePassParser(ParseValidityMixin, ABC):
 
     def _parse_tags(self) -> Sequence[str]:
         note = self.selector.xpath(".//*[6]/span/text()").get()
-        return {note}
+        return [note]
 
     @abstractmethod
     def parse(self) -> PackageItem:
@@ -179,14 +179,16 @@ class AtticVPriceSpider(Spider):
                 category="day-pass",
                 currency_symbol=adult_price_tag.split(" ")[0].replace("\xa0", ""),
                 price=adult_price_tag.split(" ")[1],
-                tags={description},
+                tags=[description],
+                validity="1 day",
             ),
             PackageItem(
                 title=base_title + student_price_text.split("-")[0],
                 category="day-pass",
                 currency_symbol=student_price_tag.split(" ")[0],
                 price=student_price_tag.split(" ")[1],
-                tags={description},
+                tags=[description],
+                validity="1 day",
             ),
         ]
 

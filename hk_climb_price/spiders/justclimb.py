@@ -49,11 +49,11 @@ class JustclimbDayPassParser(BasePassParser):
             ".//div[contains(@class, 'shoppage-title')]"
         )
 
-        tags = {
+        tags = [
             shoppage_selector.xpath("./p[1]/text()").get(),
             *shoppage_selector.xpath("./p[3]/text()").getall(),
-        }
-        return {tag.strip() for tag in tags}
+        ]
+        return [tag.strip() for tag in tags]
 
     def _parse_price_tag(self, index: int) -> str:
         xpath = f".//div[contains(@class, 'shoppage-title')]/*[{index+1}]/text()"
@@ -89,7 +89,7 @@ class JustclimbDayPassParser(BasePassParser):
         return PackageItem(
             title=title.split(sep)[0],
             category="class",
-            tags={title.split(sep)[1], *tags_str.split(sep)},
+            tags=[title.split(sep)[1], *tags_str.split(sep)],
             **breakdown_price_tag(price_tag),
         )
 
@@ -141,11 +141,11 @@ class JustclimbSharePassParser(BasePassParser):
                 + self.selector.css("div > *:nth-child(1)::text").get()
             )
 
-        def _parse_tags(self) -> str:
+        def _parse_tags(self) -> Sequence[str]:
             temp = self.selector.xpath(".//p[2]/text()").getall()
             if not temp:
-                return set()
-            return {temp[0].strip()}
+                return []
+            return [temp[0].strip()]
 
         def _parse_validity(self) -> str:
             temp = self.selector.xpath(".//p[2]/text()").getall()
@@ -263,7 +263,7 @@ class JustclimbMembershipParser(BasePassParser):
 
         def _parse_tags(self) -> Sequence[str]:
             tags = self.selector.xpath("./*[4]/text()").getall()
-            return {tag.strip() for tag in tags}
+            return [tag.strip() for tag in tags]
 
         def _parse_validity(self) -> str:
             return self._parse_title().replace("合約", "")

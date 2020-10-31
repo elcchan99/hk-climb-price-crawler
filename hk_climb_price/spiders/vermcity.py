@@ -33,12 +33,12 @@ class JustclimbPriceSpider(Spider):
             + " "
             + block.xpath("./*[2]/text()").get().split()[0],
             "category": "day-pass",
-            "tags": {
+            "tags": [
                 block.xpath("./*[3]/text()").get(),
                 block.xpath("./*[4]/text()").get(),
                 block.xpath("./*[5]/text()").get(),
                 block.xpath("./*[6]/text()").get(),
-            },
+            ],
             **breakdown_price_tag(block.xpath("./*[2]/text()").get().split()[1]),
         }
         return PackageItem(**day_pass)
@@ -51,7 +51,7 @@ class JustclimbPriceSpider(Spider):
         section_pass_text = block.xpath("./*[2]/text()").get()
         ten_pass_text = block.xpath("./*[3]/text()").get()
         base_title = block.xpath("./*[1]/text()").get()
-        tags = {block.xpath("./*[5]/text()").get()}
+        tags = [block.xpath("./*[5]/text()").get()]
         items = [
             {
                 "title": base_title + " " + process_text(section_pass_text),
