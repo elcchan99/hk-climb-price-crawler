@@ -13,3 +13,7 @@ def breakdown_price_tag(price_tag: str) -> Dict[str, Union[str, int]]:
         "currency_symbol": price_tag[0],
         "price": int(price_tag[1:].replace(",", "")),
     }
+
+
+def process_text(string: str) -> str:
+    return string.strip().replace("\xa0", "").strip("; -:")
