@@ -45,12 +45,12 @@ lint:
 
 .PHONY: justclimb
 justclimb:
-	poetry run scrapy runspider justclimb_price_crawler.py
+	./craw.sh justclimb
 
 .PHONY: vermcity
 vermcity:
-	poetry run scrapy runspider vermcity_price_crawler.py --loglevel=WARNING
+	./craw.sh vermcity
 
 .PHONY: atticv
 atticv:
-	poetry run scrapy runspider atticv_price_crawler.py --loglevel=WARNING
+	./craw.sh atticv
