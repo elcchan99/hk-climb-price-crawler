@@ -12,6 +12,8 @@ jobs:
 
       steps:
         - uses: actions/checkout@v2
+
+        # Setup Python
         - uses: actions/setup-python@v1
           with:
             python-version: 3.8
@@ -21,8 +23,11 @@ jobs:
             path: ~/.cache/pypoetry/virtualenvs
             key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
             restore-keys: |
-              ${{ runner.os }}-poetry-
+            ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
         - run: poetry --version
+
+        - name: Install dependencies
+          run: poetry install
 
         - name: Run JustClimb crawler
           run: ./crawl.sh justclimb
