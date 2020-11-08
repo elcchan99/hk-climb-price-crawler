@@ -11,7 +11,7 @@ jobs:
 
       steps:
         - name: Checkout code
-          users: action/checkout@v2
+          uses: action/checkout@v2
 
         - name: Install dependencies
           run: |
@@ -22,7 +22,8 @@ jobs:
         - name: Run JustClimb crawler
           run: ./crawl.sh justclimb
 
-        - uses: EndBug/add-and-commit@
+        - name: Commit and publish result
+          uses: EndBug/add-and-commit@
           with:
             add: 'docs/justclimb.json'
             author_name: GitHub Action
