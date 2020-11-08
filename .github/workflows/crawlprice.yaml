@@ -1,8 +1,9 @@
 name: Price-Crawler
 
-push:
-  branches:
-    - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
     crawl-price:
