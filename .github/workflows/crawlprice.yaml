@@ -40,7 +40,7 @@ jobs:
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update crawl result'
+          message: 'Update justclimb crawl result'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -78,7 +78,7 @@ jobs:
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update crawl result'
+          message: 'Update vermcity crawl result'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -116,6 +116,6 @@ jobs:
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update crawl result'
+          message: 'Update atticv crawl result'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
