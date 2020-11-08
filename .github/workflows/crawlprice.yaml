@@ -24,7 +24,7 @@ jobs:
           run: ./crawl.sh justclimb
 
         - name: Commit and publish result
-          uses: EndBug/add-and-commit
+          uses: EndBug/add-and-commit@v5
           with:
             add: 'docs/justclimb.json'
             author_name: GitHub Action
