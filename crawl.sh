@@ -6,11 +6,12 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-exist_file="$gym.json"
+mkdir -p docs
+exist_file="docs/$gym.json"
 if [ ! -f $exist_file ]; then
     touch $exist_file
 fi
-new_file="$gym-new.json"
+new_file="docs/$gym-new.json"
 
 function md5() {
     echo "$(md5sum $1 | cut -d' ' -f 1)"
