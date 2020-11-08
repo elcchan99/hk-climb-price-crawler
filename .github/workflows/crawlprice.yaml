@@ -6,44 +6,116 @@ on:
       - master
 
 jobs:
-    crawl-price:
-      name: Crawl Price
-      runs-on: ubuntu-latest
+  crawl-justclimb:
+    name: Crawl JustClimb Price
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-        # Setup Python
-        - uses: actions/setup-python@v1
-          with:
-            python-version: 3.8
-        - uses: Gr1N/setup-poetry@v4
-        - uses: actions/cache@v1
-          with:
-            path: ~/.cache/pypoetry/virtualenvs
-            key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+      # Setup Python
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: Gr1N/setup-poetry@v4
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
 
-        - run: poetry --version
+      - run: poetry --version
 
-        - name: Install dependencies
-          run: poetry install
+      - name: Install dependencies
+        run: poetry install
 
-        - name: Run JustClimb crawler
-          run: ./crawl.sh justclimb
+      - name: Run crawler
+        run: ./crawl.sh justclimb
 
-        - name: Commit and publish result
-          uses: EndBug/add-and-commit@v5
-          with:
-            add: 'docs/justclimb.json'
-            author_name: GitHub Action
-            author_email: elcchan99@gmail.com
-            message: 'Update crawl result'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and publish result
+        uses: EndBug/add-and-commit@v5
+        with:
+          add: 'docs/justclimb.json'
+          author_name: GitHub Action
+          author_email: elcchan99@gmail.com
+          branch: gh-pages
+          message: 'Update crawl result'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  crawl-vermcity:
+    name: Crawl Verm City Price
+    runs-on: ubuntu-latest
 
+    steps:
+      - uses: actions/checkout@v2
 
+      # Setup Python
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: Gr1N/setup-poetry@v4
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
 
+      - run: poetry --version
 
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run crawler
+        run: ./crawl.sh vermcity
+
+      - name: Commit and publish result
+        uses: EndBug/add-and-commit@v5
+        with:
+          add: 'docs/vermcity.json'
+          author_name: GitHub Action
+          author_email: elcchan99@gmail.com
+          branch: gh-pages
+          message: 'Update crawl result'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  crawl-atticv:
+    name: Crawl AtticV Price
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Setup Python
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: Gr1N/setup-poetry@v4
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - run: poetry --version
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run crawler
+        run: ./crawl.sh atticv
+
+      - name: Commit and publish result
+        uses: EndBug/add-and-commit@v5
+        with:
+          add: 'docs/atticv.json'
+          author_name: GitHub Action
+          author_email: elcchan99@gmail.com
+          branch: gh-pages
+          message: 'Update crawl result'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
