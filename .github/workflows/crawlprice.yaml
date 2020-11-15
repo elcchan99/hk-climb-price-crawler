@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-        - name: Run crawlers
+      - name: Run crawlers
         run: |
           ./crawl.sh justclimb
           ./crawl.sh vermcity
@@ -49,4 +49,3 @@ jobs:
           pull_strategy: "--rebase"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
