@@ -240,4 +240,8 @@ class AtticVPriceSpider(Spider):
             self._parse_5_share_pass(Selector(text=sections[3])),
             *self._parse_extra(response),
         ]
-        yield ClimbGym(name="Attic V", packages=packages)
+        yield ClimbGym(
+            name="Attic V",
+            link=self.start_urls[0],
+            packages=packages,
+        )
