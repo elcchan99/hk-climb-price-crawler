@@ -24,6 +24,7 @@ if [ $? -eq 0 ]; then
     new_md5="$(md5 $new_file)"
     if [[ "$old_md5" != "$new_md5" ]]; then
         mv $new_file $exist_file
+        echo "New files to be commit"
     else
         rm $new_file
         echo "Same content as before"
