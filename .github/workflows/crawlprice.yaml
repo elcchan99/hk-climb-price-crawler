@@ -43,7 +43,7 @@ jobs:
           author_email: elcchan99@gmail.com
           branch: gh-pages
           message: "Update justclimb crawl result"
-          pull_strategy: "--rebase"
+          pull_strategy: "--autostash"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -82,7 +82,7 @@ jobs:
           author_email: elcchan99@gmail.com
           branch: gh-pages
           message: "Update vermcity crawl result"
-          pull_strategy: "--rebase"
+          pull_strategy: "--autostash"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -121,6 +121,6 @@ jobs:
           author_email: elcchan99@gmail.com
           branch: gh-pages
           message: "Update atticv crawl result"
-          pull_strategy: "--rebase"
+          pull_strategy: "--autostash"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
