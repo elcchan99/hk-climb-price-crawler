@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: "0 8 * * SUN"
 
 jobs:
   crawl-justclimb:
@@ -36,11 +38,11 @@ jobs:
       - name: Commit and publish result
         uses: EndBug/add-and-commit@v5
         with:
-          add: 'docs/justclimb.json'
+          add: "docs/justclimb.json"
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update justclimb crawl result'
+          message: "Update justclimb crawl result"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -74,11 +76,11 @@ jobs:
       - name: Commit and publish result
         uses: EndBug/add-and-commit@v5
         with:
-          add: 'docs/vermcity.json'
+          add: "docs/vermcity.json"
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update vermcity crawl result'
+          message: "Update vermcity crawl result"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -112,10 +114,10 @@ jobs:
       - name: Commit and publish result
         uses: EndBug/add-and-commit@v5
         with:
-          add: 'docs/atticv.json'
+          add: "docs/atticv.json"
           author_name: GitHub Action
           author_email: elcchan99@gmail.com
           branch: gh-pages
-          message: 'Update atticv crawl result'
+          message: "Update atticv crawl result"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
