@@ -3,7 +3,7 @@ name: Price-Crawler
 on:
   push:
     branches:
-      - master
+      - gh-pages
   schedule:
     - cron: "0 8 * * SUN"
 
@@ -14,6 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        ref: gh-pages
 
       # Setup Python
       - uses: actions/setup-python@v1
