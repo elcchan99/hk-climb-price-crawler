@@ -6,11 +6,12 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-exist_file="$gym.json"
+mkdir -p docs
+exist_file="docs/$gym.json"
 if [ ! -f $exist_file ]; then
     touch $exist_file
 fi
-new_file="$gym-new.json"
+new_file="docs/$gym-new.json"
 
 function md5() {
     echo "$(md5sum $1 | cut -d' ' -f 1)"
@@ -23,6 +24,7 @@ if [ $? -eq 0 ]; then
     new_md5="$(md5 $new_file)"
     if [[ "$old_md5" != "$new_md5" ]]; then
         mv $new_file $exist_file
+        echo "New files to be commit"
     else
         rm $new_file
         echo "Same content as before"

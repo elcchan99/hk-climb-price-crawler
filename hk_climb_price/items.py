@@ -27,6 +27,7 @@ class PackageItem:
 @dataclass
 class ClimbGym:
     name: str
+    link: str
     packages: Sequence[PackageItem] = field(default_factory=set)
 
     def __str__(self) -> str:

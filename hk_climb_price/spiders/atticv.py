@@ -178,7 +178,7 @@ class AtticVPriceSpider(Spider):
                 title=base_title + adult_price_text.split("-")[0],
                 category="day-pass",
                 currency_symbol=adult_price_tag.split(" ")[0].replace("\xa0", ""),
-                price=adult_price_tag.split(" ")[1],
+                price=int(adult_price_tag.split(" ")[1]),
                 tags=[description],
                 validity="1 day",
             ),
@@ -186,7 +186,7 @@ class AtticVPriceSpider(Spider):
                 title=base_title + student_price_text.split("-")[0],
                 category="day-pass",
                 currency_symbol=student_price_tag.split(" ")[0],
-                price=student_price_tag.split(" ")[1],
+                price=int(student_price_tag.split(" ")[1]),
                 tags=[description],
                 validity="1 day",
             ),
@@ -240,4 +240,8 @@ class AtticVPriceSpider(Spider):
             self._parse_5_share_pass(Selector(text=sections[3])),
             *self._parse_extra(response),
         ]
-        yield ClimbGym(name="Attic V", packages=packages)
+        yield ClimbGym(
+            name="Attic V",
+            link=self.start_urls[0],
+            packages=packages,
+        )

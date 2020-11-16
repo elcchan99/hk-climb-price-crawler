@@ -124,6 +124,7 @@ class JustclimbPriceSpider(Spider):
     def parse(self, response: Selector) -> ClimbGym:  # pylint: disable=arguments-differ
         vermcity = ClimbGym(
             name="Verm City",
+            link=self.start_urls[0],
             packages=[
                 self._select_day_pass(response),
                 *self._select_clip_n_climb_passes(response),

@@ -1,0 +1,51 @@
+name: Price-Crawler
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 8 * * SUN"
+
+jobs:
+  crawl:
+    name: Crawl Prices
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Setup Python
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: Gr1N/setup-poetry@v4
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - run: poetry --version
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run crawlers
+        run: |
+          ./crawl.sh justclimb
+          ./crawl.sh vermcity
+          ./crawl.sh atticv
+
+      - name: Commit and publish result
+        uses: EndBug/add-and-commit@v5
+        with:
+          add: "docs/"
+          author_name: GitHub Action
+          author_email: elcchan99@gmail.com
+          branch: gh-pages
+          message: "Update crawl results"
+          pull_strategy: "--rebase"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
